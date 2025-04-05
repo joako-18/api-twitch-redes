@@ -1,4 +1,3 @@
-// auth_controller.go
 package infrastructure
 
 import (
@@ -33,7 +32,6 @@ func (ctrl *AuthController) Login(c *gin.Context) {
 		return
 	}
 
-	// No devolver la contraseña en la respuesta
 	userResponse := gin.H{
 		"id":       user.ID,
 		"name":     user.Name,

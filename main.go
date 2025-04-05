@@ -1,4 +1,3 @@
-// main.go
 package main
 
 import (
@@ -14,13 +13,10 @@ import (
 )
 
 func main() {
-	// 1. Inicializar la conexión a la base de datos
 	core.InitDB()
 
-	// 2. Crear un router con Gin
 	router := gin.Default()
 
-	// 3. Configuración de CORS
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:4200"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -30,33 +26,28 @@ func main() {
 		MaxAge:           12 * 3600,
 	}))
 
-	// 4. Configurar rutas estáticas
-	router.Static("/uploads", "./uploads")         // Para videos subidos
-	router.Static("/video_cache", "./video_cache") // Para videos cacheados
+	router.Static("/uploads", "./uploads")
+	router.Static("/video_cache", "./video_cache")
 
-	// 5. Crear carpetas necesarias
 	os.MkdirAll("./uploads", 0755)
 	os.MkdirAll("./video_cache", 0755)
 
-	// 6. Middlewares básicos
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	// 7. Inicializar y configurar rutas
 	usuarioRouter := usuarioInfra.NewUsuarioRouter(router)
 	usuarioRouter.Run()
 
 	videoRouter := videoInfra.NewVideoRouter(router)
 	videoRouter.Run()
 
-	// 8. Iniciar el servidor
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8000"
 	}
 
-	log.Printf("\n🚀 Servidor iniciado en http://localhost:%s", port)
-	log.Println("📁 Rutas estáticas:")
+	log.Printf("\n Servidor iniciado en http://localhost:%s", port)
+	log.Println(" Rutas estáticas:")
 	log.Println("   - /uploads para videos subidos")
 	log.Println("   - /video_cache para videos cacheados")
 

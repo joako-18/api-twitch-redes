@@ -1,4 +1,3 @@
-// video_repository.go
 package domain
 
 import "github.com/vicpoo/NetflixAPIgo/src/video/domain/entities"

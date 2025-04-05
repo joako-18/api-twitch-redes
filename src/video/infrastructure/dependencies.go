@@ -1,4 +1,3 @@
-// dependencies.go
 package infrastructure
 
 import (
@@ -12,7 +11,7 @@ func InitVideoDependencies() (
 	*GetVideoController,
 	*GetAllVideosController,
 	*CacheVideoController,
-	*UploadController, // Nuevo
+	*UploadController,
 ) {
 	repo := NewMySQLVideoRepository()
 	cacheService := application.NewVideoCacheService("./video_cache", 7*24*time.Hour)
@@ -21,7 +20,6 @@ func InitVideoDependencies() (
 	getByIDUseCase := application.NewGetVideoByIDUseCase(repo)
 	getAllUseCase := application.NewGetAllVideosUseCase(repo)
 
-	// Nuevo controlador de upload
 	uploadController := NewUploadController(repo)
 
 	createController := NewCreateVideoController(createUseCase)

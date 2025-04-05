@@ -21,8 +21,6 @@ func (r *VideoRouter) Run() {
 		videoGroup.GET("/", getAllController.Run)
 		videoGroup.GET("/:id", getController.Run)
 		videoGroup.POST("/upload", uploadController.UploadHandler)
-
-		// Rutas para el caché - CORREGIDO ClearCacheHandler (sin 's')
 		videoGroup.POST("/:id/cache", cacheController.CacheVideoHandler)
 		videoGroup.GET("/:id/cache", cacheController.GetCachedVideoStreamHandler)
 	}

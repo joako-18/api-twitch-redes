@@ -20,13 +20,11 @@ func (uc *UpdateUsuarioUseCase) Run(usuario *entities.Usuario) (*entities.Usuari
 		return nil, errors.New("ID de usuario inválido")
 	}
 
-	// Verificar si el usuario existe
 	existingUser, err := uc.repo.GetById(usuario.ID)
 	if err != nil {
 		return nil, errors.New("usuario no encontrado")
 	}
 
-	// Verificar si el nuevo email ya está en uso por otro usuario
 	if usuario.Email != existingUser.Email {
 		_, err := uc.repo.GetByEmail(usuario.Email)
 		if err == nil {
@@ -34,7 +32,6 @@ func (uc *UpdateUsuarioUseCase) Run(usuario *entities.Usuario) (*entities.Usuari
 		}
 	}
 
-	// Verificar si el nuevo username ya está en uso por otro usuario
 	if usuario.Username != existingUser.Username {
 		_, err := uc.repo.GetByUsername(usuario.Username)
 		if err == nil {
@@ -47,7 +44,6 @@ func (uc *UpdateUsuarioUseCase) Run(usuario *entities.Usuario) (*entities.Usuari
 		return nil, err
 	}
 
-	// Obtener el usuario actualizado para devolverlo
 	updatedUser, err := uc.repo.GetById(usuario.ID)
 	if err != nil {
 		return nil, err

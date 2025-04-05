@@ -25,7 +25,6 @@ func (r *MySQLVideoRepository) Save(video *entities.Video) error {
 	var args []interface{}
 
 	if video.GetID() == 0 {
-		// Insertar nuevo video
 		query = `
 			INSERT INTO videos 
 			(title, description, url, local_path, is_cached, cache_expiry, user_id) 
@@ -41,7 +40,6 @@ func (r *MySQLVideoRepository) Save(video *entities.Video) error {
 			video.GetUserID(),
 		}
 	} else {
-		// Actualizar video existente
 		query = `
 			UPDATE videos SET 
 			title = ?, description = ?, url = ?, local_path = ?, 
@@ -162,7 +160,6 @@ func (r *MySQLVideoRepository) GetAll() ([]entities.Video, error) {
 	return videos, nil
 }
 
-// nullTime convierte time.Time a sql.NullTime
 func nullTime(t time.Time) sql.NullTime {
 	if t.IsZero() {
 		return sql.NullTime{Valid: false}

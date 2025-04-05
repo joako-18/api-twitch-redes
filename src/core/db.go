@@ -1,4 +1,3 @@
-// db.go
 package core
 
 import (
@@ -13,7 +12,6 @@ import (
 
 var db *sql.DB
 
-// InitDB inicializa la conexión a la base de datos.
 func InitDB() {
 	if err := godotenv.Load(); err != nil {
 		log.Println("Advertencia: No se pudo cargar .env")
@@ -38,7 +36,6 @@ func InitDB() {
 	fmt.Println("Conexión a la BD exitosa")
 }
 
-// GetDB retorna la conexión a la base de datos.
 func GetDB() *sql.DB {
 	return db
 }

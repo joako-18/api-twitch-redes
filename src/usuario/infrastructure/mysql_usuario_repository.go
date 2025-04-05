@@ -1,4 +1,3 @@
-// mysql_usuario_repository.go
 package infrastructure
 
 import (
@@ -21,7 +20,6 @@ func NewMySQLUsuarioRepository() domain.IUsuario {
 }
 
 func (r *MySQLUsuarioRepository) Save(usuario *entities.Usuario) error {
-	// Hash password before saving
 	if err := usuario.HashPassword(); err != nil {
 		log.Println("Error al hashear la contraseña:", err)
 		return fmt.Errorf("error al procesar la contraseña")
@@ -55,7 +53,6 @@ func (r *MySQLUsuarioRepository) Save(usuario *entities.Usuario) error {
 }
 
 func (r *MySQLUsuarioRepository) Update(usuario *entities.Usuario) error {
-	// Check if password was changed
 	if usuario.Password != "" {
 		if err := usuario.HashPassword(); err != nil {
 			log.Println("Error al hashear la contraseña:", err)

@@ -1,4 +1,3 @@
-// get_all_videos_usecase.go
 package application
 
 import (

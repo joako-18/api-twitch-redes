@@ -1,4 +1,3 @@
-// usuario.go
 package entities
 
 import (
@@ -16,7 +15,6 @@ type Usuario struct {
 	Email    string `json:"email" gorm:"unique;not null"`
 }
 
-// HashPassword hashes the user password
 func (u *Usuario) HashPassword() error {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
 	if err != nil {
@@ -26,12 +24,10 @@ func (u *Usuario) HashPassword() error {
 	return nil
 }
 
-// CheckPassword compares input password with stored hash
 func (u *Usuario) CheckPassword(password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password))
 }
 
-// Setters
 func (u *Usuario) SetID(id int32) {
 	u.ID = id
 }
@@ -56,7 +52,6 @@ func (u *Usuario) SetEmail(email string) {
 	u.Email = email
 }
 
-// Getters
 func (u *Usuario) GetID() int32 {
 	return u.ID
 }
@@ -81,7 +76,6 @@ func (u *Usuario) GetEmail() string {
 	return u.Email
 }
 
-// ToJSON returns JSON representation without password
 func (u *Usuario) ToJSON() ([]byte, error) {
 	type Alias Usuario
 	return json.Marshal(&struct {

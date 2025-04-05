@@ -6,7 +6,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-var JWTSecret = []byte("your-256-bit-secret") // Change this in production!
+var JWTSecret = []byte("your-256-bit-secret")
 
 type Claims struct {
 	UserID int32 `json:"userId"`

@@ -1,4 +1,3 @@
-// get_all_videos_controller.go
 package infrastructure
 
 import (

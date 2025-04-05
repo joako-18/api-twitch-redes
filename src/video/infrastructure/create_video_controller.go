@@ -1,4 +1,3 @@
-// create_video_controller.go
 package infrastructure
 
 import (
